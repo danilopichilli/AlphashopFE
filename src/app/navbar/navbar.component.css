@@ -1,0 +1,46 @@
+.nav {
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none;
+	list-style-type: none;
+	list-style-image: none;
+	list-style-position: outside;
+}
+
+.navbar-brand img {
+	height: 100%
+}
+
+#dropdownMenu1 {
+	margin: 0.3em;
+	margin-right: 5.8em;
+	background-color: transparent;
+}
+
+#dropdownMenu1 button.thumbnail {
+	margin: 0;
+	padding: 0;
+}
+
+#dropdownMenu1 img {
+	max-height: 2.0em;
+	border-radius: 0.3em;
+}
+
+.nav>li {
+	float: left;
+	margin-bottom: -1px;
+}
+
+.nav>li, .nav>li>a {
+	display: block;
+	position: relative;
+	line-height: 1.42857;
+	text-shadow: none;
+}
+
+.tabbable-line>.nav>li.active {
+	background: 0 0;
+	border-bottom: 4px solid #36c6d3;
+	position: relative;
+}
