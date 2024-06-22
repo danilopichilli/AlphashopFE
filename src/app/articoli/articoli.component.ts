@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ArticoliDataService } from '../services/data/articoli-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { AuthJWTService } from '../services/authJWTService';
+import { RouteGuardService } from '../services/route-guard.service';
 
 export class Articoli {
 
@@ -60,7 +62,10 @@ export class ArticoliComponent implements OnInit {
   constructor(
     private articoliService : ArticoliDataService, 
     private route : ActivatedRoute,
-    private router : Router) {}
+    private router : Router,
+    private isAdmin : RouteGuardService,
+    private authJWTService : AuthJWTService
+  ) {}
 
     ngOnInit(): void {
       this.filter = this.route.snapshot.params['filter'];
@@ -68,6 +73,9 @@ export class ArticoliComponent implements OnInit {
       if(this.filter != undefined){
         this.getArticoli(this.filter);
       }
+
+      const ruolo = this.route.snapshot.data['ruolo'];
+      console.log('Ruolo ricevuto : ', ruolo)
     }
 
     refresh(){
@@ -124,7 +132,17 @@ export class ArticoliComponent implements OnInit {
       console.log(`Modifica articolo ${codArt} `);
       this.router.navigate(['newart', codArt])
     }
-} 
+
+    show(): boolean {
+      const token = this.authJWTService.getAuthToken();
+      if(token != null) {
+        return this.isAdmin.getRolesFromToken(token);
+      } else {
+        return false;
+      }
+      
+    }
+}
 
 export class ApiMsg {
 
@@ -133,17 +151,3 @@ export class ApiMsg {
     public message : string
   ){}
 }
-
-/*
-db.createUser({
-    user: "admin",
-    pwd: "admin",
-    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
-})
-
-db.createUser({
-    user: "danilo",
-    pwd: "password",
-    roles: [ { role: "readWrite", db: "ms-users" } ]
-})
-*/

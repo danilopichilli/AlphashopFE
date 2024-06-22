@@ -1,20 +1,23 @@
-<app-jumbotron [Titolo]="'Autenticazione'" [SottoTitolo]="'Inserisci la Userid e la Password'"></app-jumbotron>
+<app-jumbotron [Titolo]="'Autenticazione'" [SottoTitolo]="'Inserisci la username e la password'"></app-jumbotron>
 
 <div class="container login-container">
   <div class="row">
     <div class="col-md-12 login-form">
       <h3>Login</h3>
       <div class="form-group">
-        <input type="text" class="form-control" id="userId" placeholder="Nome Utente" [(ngModel)] = "userId"> 
+        <input type="text" class="form-control" id="username" placeholder="Nome Utente" [(ngModel)] = "username">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)] = "password"> 
+        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)] = "password">
       </div>
       <div class="form-group">
         <button (click)=gestAut() class="btnSubmit">Connetti</button>
       </div>
       <div class="form-group">
         <a href="#" class="ForgetPwd">Password Dimenticata?</a>
+      </div>
+      <div class="form-group">
+        Non sei ancora registrato? Clicca <a href="/register" class="ForgetPwd">qui</a> per registrarti
       </div>
       <div class="alert alert-danger" role="alert" *ngIf="!autenticato">{{errorMsg}}</div>
     </div>

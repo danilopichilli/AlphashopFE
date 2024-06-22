@@ -19,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NewartComponent } from './newart/newart.component';
 import { AuthInterceptService } from './services/http/auth-intercept.service';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     NavbarComponent,
     WelcomeComponent,
     NewartComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

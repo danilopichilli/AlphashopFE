@@ -9,20 +9,21 @@ import { AuthJWTService } from '../services/authJWTService';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userId = '';
+  
+  username = '';
   password = '';
   autenticato = true;
-  errorMsg = 'Spiacente, la userid o la password sono errati!';
+  errorMsg = 'Spiacente, la username o la password sono errati!';
 
   constructor(private route : Router, private JWTService : AuthJWTService) {}
 
   ngOnInit(): void {}
 
   gestAut() {
-    this.JWTService.autenticaService(this.userId,this.password).subscribe({
+    this.JWTService.autenticaService(this.username,this.password).subscribe({
       next: (data) => {
         console.log(data);
-        this.route.navigate(['welcome',this.userId]);
+        this.route.navigate(['welcome',this.username]);
         this.autenticato = true;
       },
       error: (err) => {
@@ -30,14 +31,6 @@ export class LoginComponent implements OnInit {
         this.autenticato = false;
       }
     });
-    /*
-    if(this.BasicAuth.autentica(this.userId,this.password)) {
-      this.route.navigate(['welcome',this.userId]);
-      this.autenticato = true;
-    } else {
-      this.autenticato = false;
-    }
-  */
   }
 
 }

@@ -9,15 +9,17 @@ import { RouteGuardService } from './services/route-guard.service';
 import { NewartComponent } from './newart/newart.component';
 import { ruoli } from 'src/models/ruoli';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path : '', component : LoginComponent}, //resta vuoto se non specifico nessun url, utilizza il login component
   {path : 'index', component : LoginComponent},
   {path : 'login', component : LoginComponent},
-  {path : 'welcome/:userId', component : WelcomeComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},
+  {path : 'register', component : RegisterComponent},
+  {path : 'welcome/:username', component : WelcomeComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},
   {path : 'articoli', component : ArticoliComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},
   {path : 'articoli/:filter', component : ArticoliComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},
-  {path : 'newart/:codArt', component : NewartComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.amministratore] }}, 
+  {path : 'newart/:codArt', component : NewartComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.amministratore] }},
   {path : 'logout', component : LogoutComponent},
   {path : 'forbidden', component : ForbiddenComponent},
   {path : '**', component : ErrorComponent} //con i doppi asterischi si specifica il path laddove non esiste nessun componente

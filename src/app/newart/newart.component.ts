@@ -103,7 +103,7 @@ export class NewartComponent implements OnInit {
   }
 
   abort(){
-    this.router.navigate(['articoli', this.codArt]);
+    this.router.navigate(['articoli']);
   }
 
   salva(){
@@ -116,7 +116,7 @@ export class NewartComponent implements OnInit {
           this.conferma = this.apiMsg.message;
           console.log(this.conferma);
 
-          this.router.navigate(['newArt', this.articolo.codArt]);
+          this.router.navigate(['newart', this.articolo.codArt]);
         },
         error => {
           this.errore = error.error.messaggio;

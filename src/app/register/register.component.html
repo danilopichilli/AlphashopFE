@@ -1,0 +1,65 @@
+<app-jumbotron [Titolo]="'Registrazione'" [SottoTitolo]="'Inserisci i dati necessari per la registrazione'" [Show]="false"></app-jumbotron>
+
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-12" class="login-form">
+            <h3>Registrazione</h3>
+            <div class="portlet-body form">
+                <form (ngSubmit)="artForm.valid && register()" #artForm="ngForm">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" name="nome" placeholder="Nome" [(ngModel)] ="utente.nome" required minlength="1" #nome="ngModel">
+                            <span style="color:red" *ngIf="nome.dirty && nome.invalid">
+                                Il campo nome non può essere vuoto
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cognome">Cognome:</label>
+                            <input type="text" class="form-control" name="cognome" placeholder="Cognome" [(ngModel)] ="utente.cognome" required minlength="1" #cognome="ngModel">
+                            <span style="color:red" *ngIf="cognome.dirty && cognome.invalid">
+                                Il campo cognome non può essere vuoto
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)] ="utente.email" required #email="ngModel">
+                            <span style="color:red" *ngIf="email.dirty && email.invalid">
+                                Il campo email non può essere vuoto
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Data di nascita</label>
+                            <input type="date" class="form-control" name="dob" [(ngModel)] ="utente.dob" required #dob="ngModel">
+                            <span style="color:red" *ngIf="dob.dirty && dob.invalid">
+                                Il campo data di nascita non può essere vuoto
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Username:</label>
+                            <input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)] ="utente.username" required minlength="5" maxlength="80" #username="ngModel">
+                            <span style="color:red" *ngIf="username.dirty && username.invalid">
+                                Il campo username deve essere compreso tra 5 e 80 caratteri
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)] ="utente.password" required minlength="8" maxlength="80" #password="ngModel">
+                            <span style="color:red" *ngIf="password.dirty && password.invalid">
+                                Il campo password deve essere compreso tra 8 e 80 caratteri
+                            </span>
+                        </div>
+
+                        <button type="submit" id="btnAdd" class="btn btn-primary form-buttons" [disabled]="artForm.invalid">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i> Registrati
+                        </button>
+
+                        <button  id="btnAbort" class="btn btn-warning form-buttons" (click) = abort() >
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>  Annulla
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

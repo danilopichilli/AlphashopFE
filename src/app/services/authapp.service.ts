@@ -9,9 +9,9 @@ import { port, server } from '../app.constants';
 export class AuthappService {
   constructor(private httpClient : HttpClient) {}
 
-  autenticaService(userId: string, password: string){
+  autenticaService(username: string, password: string){
 
-    let authString = 'Basic ' + window.btoa(userId + ':' + password);
+    let authString = 'Basic ' + window.btoa(username + ':' + password);
 
     let headers = new HttpHeaders(
       {Authorization : authString}
@@ -22,7 +22,7 @@ export class AuthappService {
     .pipe(
       map(data => {
         if(typeof sessionStorage !== 'undefined') {
-          sessionStorage.setItem('Utente', userId);
+          sessionStorage.setItem('Utente', username);
           sessionStorage.setItem('AuthToken', authString);
         }
         return data;

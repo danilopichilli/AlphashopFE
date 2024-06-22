@@ -2,17 +2,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { authServerUri, port, server } from '../app.constants';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthJWTService {
-  constructor(private httpClient : HttpClient) {}
+  constructor(
+    private httpClient : HttpClient
+  ) {}
 
    CONST_UTENTE : string= 'Utente';
    CONST_AUTH_TOKEN : string = 'AuthToken';
 
-  autenticaService(username: string, password: string){  
+  autenticaService(username: string, password: string){
 
     return this.httpClient.post<any>(`${authServerUri}`, {username, password})
     .pipe(
@@ -39,7 +42,7 @@ export class AuthJWTService {
     return utente !== 'null' ? utente : '';
   }
 
-  getAuthToken(){
+  getAuthToken(): string | null{
     if(this.loggedUser()){
       return sessionStorage.getItem(this.CONST_AUTH_TOKEN);
     } else {
@@ -64,4 +67,5 @@ export class AuthJWTService {
       sessionStorage.removeItem(this.CONST_AUTH_TOKEN);
     }
   }
+
 }

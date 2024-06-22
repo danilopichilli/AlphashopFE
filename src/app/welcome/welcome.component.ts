@@ -19,7 +19,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.utente = this.route.snapshot.params['userId'];
+    this.utente = this.route.snapshot.params['username'];
   }
 
   getSaluti() {

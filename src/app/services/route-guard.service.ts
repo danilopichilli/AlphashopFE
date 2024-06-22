@@ -15,7 +15,7 @@ export class RouteGuardService implements CanActivate {
 
   constructor(private JWTService : AuthJWTService, private route : Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean{ 
+  canActivate(route: ActivatedRouteSnapshot) : boolean{ 
 
     this.token = this.JWTService.getAuthToken();
 
@@ -27,16 +27,31 @@ export class RouteGuardService implements CanActivate {
       this.route.navigate(["login"]);
       return false;
      } else {
-      if ( route.data['roles'] == null || route.data['roles'].length === 0)
+      if ( route.data['roles'] == null || route.data['roles'].length === 0){
         return true;
-      else if (this.ruoli.some(r => route.data['roles'].includes(r))) 
+      }
+      else if (this.ruoli.some(r => route.data['roles'].includes(r))) {
+        const rolesData = {
+          ruolo: this.ruoli
+        };
+        route.data = { ...route.data, ...rolesData }; // Copia route.data e aggiungi ruoliData
         return true;
+      }
        else {
         this.route.navigate(["forbidden"]);
         return false;
       }
-      
      }
+  }
+
+  getRolesFromToken(token: string): boolean {
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    const roles = decodedToken.authorities || [];
+    if(roles.includes('ROLE_ADMIN'))
+      return true;
+    else
+    return false;
   }
 
 }
