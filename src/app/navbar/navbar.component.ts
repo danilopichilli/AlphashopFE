@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthappService } from '../services/authapp.service';
+import { AuthJWTService } from '../services/authJWTService';
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +9,17 @@ import { AuthappService } from '../services/authapp.service';
 })
 export class NavbarComponent implements OnInit{
 
-  constructor (private BasicAuth : AuthappService) {}
+  constructor (private JWTService : AuthJWTService) {}
 
   ngOnInit(): void {
   }
 
   getBasicAuth(): boolean {
-   return this.BasicAuth.isLogged(); 
+   return this.JWTService.isLogged(); 
   }
 
   getUser(): string | null {
-    return this.BasicAuth.loggedUser();
+    return this.JWTService.loggedUser();
   }
 
 }

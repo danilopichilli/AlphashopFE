@@ -10,11 +10,14 @@ import { NewartComponent } from './newart/newart.component';
 import { ruoli } from 'src/models/ruoli';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegisterComponent } from './register/register.component';
+import { IssignedinguardService } from './services/issignedinguard.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path : '', component : LoginComponent}, //resta vuoto se non specifico nessun url, utilizza il login component
-  {path : 'index', component : LoginComponent},
-  {path : 'login', component : LoginComponent},
+  {path : 'index', component : LoginComponent, canActivate:[IssignedinguardService]},
+  {path : 'login', component : LoginComponent, canActivate:[IssignedinguardService]},
+  {path : 'dashboard/:utente', component : DashboardComponent},
   {path : 'register', component : RegisterComponent},
   {path : 'welcome/:username', component : WelcomeComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},
   {path : 'articoli', component : ArticoliComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},

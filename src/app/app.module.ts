@@ -20,6 +20,7 @@ import { NewartComponent } from './newart/newart.component';
 import { AuthInterceptService } from './services/http/auth-intercept.service';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RegisterComponent } from './register/register.component';
     WelcomeComponent,
     NewartComponent,
     ForbiddenComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
