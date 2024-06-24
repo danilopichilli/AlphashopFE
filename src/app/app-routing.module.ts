@@ -17,7 +17,7 @@ const routes: Routes = [
   {path : '', component : LoginComponent}, //resta vuoto se non specifico nessun url, utilizza il login component
   {path : 'index', component : LoginComponent, canActivate:[IssignedinguardService]},
   {path : 'login', component : LoginComponent, canActivate:[IssignedinguardService]},
-  {path : 'dashboard/:utente', component : DashboardComponent},
+  {path : 'dashboard/:username', component : DashboardComponent},
   {path : 'register', component : RegisterComponent},
   {path : 'welcome/:username', component : WelcomeComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},
   {path : 'articoli', component : ArticoliComponent, canActivate:[RouteGuardService], data : {roles : [ruoli.utente] }},

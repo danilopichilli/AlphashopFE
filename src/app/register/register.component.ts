@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { registrationServerUri } from '../app.constants';
 import { Router } from '@angular/router';
+import { Utente } from 'src/models/utente.models';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit{
   utente! : Utente;
 
   ngOnInit(): void {
-    this.utente = new Utente();
+    this.utente = new Utente("","","","","",new Date());
   }
 
   register(){
@@ -35,13 +36,3 @@ export class RegisterComponent implements OnInit{
     }
 }
 
-export class Utente{
-
-  username! : String;
-  password! : String;
-  email! : String;
-  nome! : String;
-  cognome! : String;
-  dob!: Date;
-
-}
