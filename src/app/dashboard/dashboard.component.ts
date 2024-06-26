@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   username! : String;
   utente! : Utente;
+  showPassword: boolean = false;
   private subscription!: Subscription;
   constructor(
     private route : ActivatedRoute,
@@ -48,6 +49,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   abort() {
     this.router.navigate(['welcome', this.username]);
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+    const passwordInput = document.getElementById('passwordInput');
+    if (passwordInput) {
+      passwordInput.setAttribute('type', this.showPassword ? 'text' : 'password');
+    }
   }
 
 }

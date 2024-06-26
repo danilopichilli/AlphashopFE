@@ -36,7 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NewartComponent,
     ForbiddenComponent,
     RegisterComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

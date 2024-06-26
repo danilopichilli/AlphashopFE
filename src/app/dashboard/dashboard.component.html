@@ -37,18 +37,35 @@
                         </div>
                         <div class="form-group">
                             <label for="dob">Username:</label>
-                            <input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)] ="utente.username" required minlength="5" maxlength="80" #username="ngModel">
-                            <span style="color:red" *ngIf="username.dirty && username.invalid">
+                            <input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)] ="utente.username" [disabled]="utente.username">
+                            <!--<span style="color:red" *ngIf="username.dirty && username.invalid">
                                 Il campo username deve essere compreso tra 5 e 80 caratteri
                             </span>
+                            required minlength="5" maxlength="80" #username="ngModel"
+                            -->
                         </div>
-                        <div class="form-group">
-                            <label for="dob">Password</label>
+                        <!--<div class="form-group">
+                            <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)] ="utente.password" required minlength="8" maxlength="80" #password="ngModel">
                             <span style="color:red" *ngIf="password.dirty && password.invalid">
                                 Il campo password deve essere compreso tra 8 e 80 caratteri
                             </span>
-                        </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <div class="input-group">
+                              <input id="passwordInput" type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="utente.password" required minlength="8" maxlength="80" #password="ngModel">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePasswordVisibility" (click)="togglePasswordVisibility()">
+                                  <i class="fa" [ngClass]="{ 'fa-eye': showPassword, 'fa-eye-slash': !showPassword }"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <small class="form-text text-danger" *ngIf="password.dirty && password.invalid">
+                              Il campo password deve essere compreso tra 8 e 80 caratteri.
+                            </small>
+                          </div>
+                          
 
                         <button type="submit" id="btnAdd" class="btn btn-primary form-buttons" [disabled]="artForm.invalid">
                             <i class="fa fa-floppy-o" aria-hidden="true"></i> Salva

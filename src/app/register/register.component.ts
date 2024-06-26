@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { registrationServerUri } from '../app.constants';
 import { Router } from '@angular/router';
 import { Utente } from 'src/models/utente.models';
+import { UtentiDataService } from '../services/data/utenti-data.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { Utente } from 'src/models/utente.models';
 })
 export class RegisterComponent implements OnInit{
 
-  constructor (private route : Router, private httpClient : HttpClient) {}
+  constructor (private route : Router, private utenteService : UtentiDataService) {}
 
   utente! : Utente;
 
@@ -20,8 +21,8 @@ export class RegisterComponent implements OnInit{
   }
 
   register(){
-      return this.httpClient.post<any>(`${registrationServerUri}`, this.utente)
-      .subscribe(
+      return this.utenteService.registerUser(this.utente).
+      subscribe(
         response => {
           console.log('User registered successfully', response);
           this.route.navigate(['login']);
