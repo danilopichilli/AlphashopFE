@@ -81,7 +81,7 @@ export class NewartComponent implements OnInit {
   ngOnInit(): void {
     this.codArt = this.route.snapshot.params['codArt'];
 
-    this.articolo = new Articoli("","","",0,0,0,"1 ",new Date(),new Iva(22,"",22),new FamAss(1, ""));
+    this.articolo = new Articoli("","","",0,0,0,"1",new Date(),new Iva(22,"",22),new FamAss(1, ""));
 
     if(this.codArt != "-1"){
 

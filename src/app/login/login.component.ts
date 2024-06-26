@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
   autenticato = true;
   errorMsg = 'Spiacente, la username o la password sono errati!';
 
-  constructor(private route : Router, private JWTService : AuthJWTService) {}
+  constructor(private route : Router, private jwtService : AuthJWTService) {}
 
   ngOnInit(): void {}
 
   gestAut() {
-    this.JWTService.autenticaService(this.username,this.password).subscribe({
+    this.jwtService.autenticaService(this.username,this.password).subscribe({
       next: (data) => {
         console.log(data);
         this.route.navigate(['welcome',this.username]);

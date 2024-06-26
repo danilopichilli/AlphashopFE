@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
-import { authServerUri, port, server } from '../app.constants';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, map } from 'rxjs';
+import { authServerUri } from '../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +11,23 @@ export class AuthJWTService {
     private httpClient : HttpClient
   ) {}
 
-   CONST_UTENTE : string= 'Utente';
-   CONST_AUTH_TOKEN : string = 'AuthToken';
+   private readonly CONST_UTENTE : string= 'Utente';
+   private readonly CONST_BEARER_TOKEN : string = 'BearerToken';
 
+      
   autenticaService(username: string, password: string){
 
-    return this.httpClient.post<any>(`${authServerUri}`, {username, password})
+    const authString = 'Basic ' + window.btoa(`${username}:${password}`);
+    const headers = new HttpHeaders({ Authorization: authString }) ;
+
+    
+    const body = { username: username, password: password };
+    return this.httpClient.post<any>(`${authServerUri}`,body, {headers})
     .pipe(
       map(data => {
         if(typeof sessionStorage !== 'undefined') {
           sessionStorage.setItem(this.CONST_UTENTE, username);
-          sessionStorage.setItem(this.CONST_AUTH_TOKEN,`Bearer ${data.token}`);
+          sessionStorage.setItem(this.CONST_BEARER_TOKEN,`Bearer ${data.token}`);
         }
         return data;
       })
@@ -44,7 +49,7 @@ export class AuthJWTService {
 
   getAuthToken(): string | null{
     if(this.loggedUser()){
-      return sessionStorage.getItem(this.CONST_AUTH_TOKEN);
+      return sessionStorage.getItem(this.CONST_BEARER_TOKEN);
     } else {
       return "";
     }
@@ -64,8 +69,10 @@ export class AuthJWTService {
   clearAll() {
     if (typeof sessionStorage !== 'undefined') {
       sessionStorage.removeItem(this.CONST_UTENTE);
-      sessionStorage.removeItem(this.CONST_AUTH_TOKEN);
+      sessionStorage.removeItem(this.CONST_BEARER_TOKEN);
     }
   }
+
+
 
 }
